@@ -6,44 +6,35 @@ const getApi = async () => {
     const actualResponse = await res.json();
     const partyArray = actualResponse.data;
     state.push(...partyArray);
-    return state;
+    render();
   }
   catch {
     console.log('Not Found');
   }
 }
+getApi();
 
-// const processData = async () => {
-//   const res = await getApi();
-//   return res;
-// }
-const processData = getApi();
-console.log(processData.then(getApi()));
-const stateQuestion = getApi();
-console.log(stateQuestion);
-console.log(state);
-console.log(state.length);
-console.log([{ 'a': "b" }, { 'c': '3' }]);
-const eventParties = () => {
-  const listofParties = ""
-  for (let i = 0; i < state.length; i++) {
-    listofParties += `<output>${state[i].name}</output>"`;
-  }
+const eventParties = (arr) => {
+  let listofParties = "";
+  arr.forEach(elem => {
+    listofParties += `<output>${elem.name}</output>`;
+  });
   return listofParties;
 }
 
 const partyDetails = () => {
   const details = "";
   for (let i = 0; i < state.length; i++) {
-
+    console.log('b');
   }
   return details;
 }
 
-const entirePage = document.querySelector('#app');
-entirePage.innerHTML = `
-  <h1>Party Planner</h1>
-  <h2>Upcoming Parties</h2>
-  <section>${listofParties()}</section >
-`;
-
+const render = () => {
+  const entirePage = document.querySelector('#app');
+  entirePage.innerHTML = `
+    <h1>Party Planner</h1>
+    <h2>Upcoming Parties</h2>
+    <section>${eventParties(state)}</section >
+  `;
+}
