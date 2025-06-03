@@ -1,0 +1,15 @@
+section {
+  display: flex;
+}
+
+ol>li {
+  margin: 1em;
+  border: 1px solid black;
+  padding: 1em;
+  padding-right: 5em;
+  list-style-type: none;
+}
+
+h1 {
+  padding-left: 35%;
+}
