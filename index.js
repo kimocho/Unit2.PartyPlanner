@@ -6,6 +6,7 @@ div.innerHTML = `
   <section>
     <h2>Upcoming Parties</h2>
     <ul id="partyNames"></ul>
+    <h2>Here are a list of guest RSVPs</h2>
   </section>
   <aside>
     <h2>Party Details</h2>
@@ -53,4 +54,21 @@ const renderDetails = ({ name, id, date, description, location }) => {
   `;
 }
 
+const guestApi = async () => {
+  const response = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/guests');
+  const responseJson = await response.json();
+  const guestList = responseJson.data;
+  console.log('guest', guestList);
+}
+
+const rsvpApi = async () => {
+  const response = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/rsvps');
+  const responseJson = await response.json();
+  const rsvpList = responseJson.data;
+  console.log('rsvp', rsvpList);
+}
+
 getApi();
+
+guestApi();
+rsvpApi();
