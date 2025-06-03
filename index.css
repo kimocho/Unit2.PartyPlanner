@@ -9,10 +9,22 @@ main {
   margin: 5px;
 }
 
+#partyNames {
+  padding: 0px;
+}
+
 #partyDetails>li {
   list-style-type: none;
 }
 
+#partyDetails {
+  padding: 0px;
+}
+
 aside {
   margin-left: 50px;
+}
+
+h1 {
+  text-align: center;
 }

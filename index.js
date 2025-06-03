@@ -1,11 +1,7 @@
-const state = {
-  eventNames: [],
-  eventDetails: []
-};
-
 const div = document.querySelector('#app');
 div.innerHTML = `
   <h1>Party Planner</h1>
+  <hr>
   <main>
   <section>
     <h2>Upcoming Parties</h2>
@@ -13,13 +9,14 @@ div.innerHTML = `
   </section>
   <aside>
     <h2>Party Details</h2>
+    <h3>Select One of the Parties to Find Out More!</h3>
     <ul id="partyDetails"></ul>
   </aside>
   </main>
 `;
 const partyNamesUL = document.querySelector('#partyNames');
 const partyDetailsUL = document.querySelector('#partyDetails');
-
+const detailHeading = document.querySelector('h3');
 
 const getApi = async () => {
   try {
@@ -47,6 +44,7 @@ const render = (arr) => {
 }
 
 const renderDetails = ({ name, id, date, description, location }) => {
+  detailHeading.remove();
   partyDetailsUL.innerHTML = `
     <li>Name: ${name}</li>
     <li>ID: ${id}</li>
