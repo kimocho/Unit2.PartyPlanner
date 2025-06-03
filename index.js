@@ -23,7 +23,6 @@ const getApi = async () => {
     const res = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/events');
     const resJson = await res.json();
     const partyArray = resJson.data;
-    console.log(partyArray);
     render(partyArray);
   }
   catch {
