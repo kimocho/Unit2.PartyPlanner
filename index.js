@@ -1,68 +1,59 @@
 const state = {
   eventNames: [],
-  //eventDetails: []
+  eventDetails: []
 };
 
-const entirePage = document.querySelector('#app');
-entirePage.innerHTML = `
+const div = document.querySelector('#app');
+div.innerHTML = `
   <h1>Party Planner</h1>
-  <h2>Upcoming Parties</h2>
+  <main>
+  <section>
+    <h2>Upcoming Parties</h2>
+    <ul id="partyNames"></ul>
+  </section>
+  <aside>
+    <h2>Party Details</h2>
+    <ul id="partyDetails"></ul>
+  </aside>
+  </main>
 `;
-const middle = document.createElement('section');
-entirePage.appendChild(middle);
+const partyNamesUL = document.querySelector('#partyNames');
+const partyDetailsUL = document.querySelector('#partyDetails');
+
 
 const getApi = async () => {
   try {
     const res = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/events');
     const resJson = await res.json();
     const partyArray = resJson.data;
-    puttingNamesInState(partyArray);
-    render();
+    console.log(partyArray);
+    render(partyArray);
   }
   catch {
     console.log('Not Found');
   }
 }
 
-const puttingNamesInState = (arr) => {
-  arr.forEach(partyObj => {
-    state.eventNames.push(partyObj.name);
-  });
-}
-
-const detailsRender = async (partyName) => {
-  const res = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/events');
-  const resJson = await res.json();
-  const partyArray = resJson.data;
-  const ul = document.createElement('ul');
-  middle.append(ul);
-  const h2 = document.createElement('h2');
-  h2.innerText = 'Party Details';
-  ul.appendChild(h2);
-  partyArray.forEach(obj => {
-    if (obj.name === partyName) {
-      for (let key in obj) {
-        // state.eventDetails.push(obj[key]);
-        const li = document.createElement('li');
-        li.innerText = `${key}: ${obj[key]}`;
-        ul.append(li);
-      }
-    }
-  });
-}
-
-const render = () => {
-  const ol = document.createElement('ol');
-  middle.appendChild(ol);
-  state.eventNames.forEach(partyName => {
+const render = (arr) => {
+  arr.forEach(obj => {
     const li = document.createElement('li');
-    li.addEventListener('click', () => {
-      //another function call
-      detailsRender(partyName);
+    li.innerText = obj.name;
+    partyNamesUL.appendChild(li);
+    li.addEventListener('click', (event) => {
+      event.preventDefault();
+      renderDetails(obj);
     });
-    li.innerText = partyName;
-    ol.appendChild(li);
   });
+}
+
+const renderDetails = ({ name, id, date, description, location }) => {
+  partyDetailsUL.innerHTML = `
+    <li>Name: ${name}</li>
+    <li>ID: ${id}</li>
+    <li>Date: ${date}</li>
+    <li>Description: ${description}</li>
+    <li>Location: ${location}</li>
+  `;
 }
 
 getApi();
