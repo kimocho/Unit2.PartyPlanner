@@ -1,3 +1,7 @@
+const state = {
+  partyObjects: []
+}
+
 const div = document.querySelector('#app');
 div.innerHTML = `
   <h1>Party Planner</h1>
@@ -24,15 +28,16 @@ const getApi = async () => {
     const res = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/events');
     const resJson = await res.json();
     const partyArray = resJson.data;
-    render(partyArray);
+    state.partyObjects = partyArray;
+    render();
   }
   catch {
     console.log('Not Found');
   }
 }
 
-const render = (arr) => {
-  arr.forEach(obj => {
+const render = () => {
+  state.partyObjects.forEach(obj => {
     const li = document.createElement('li');
     li.innerText = obj.name;
     partyNamesUL.appendChild(li);
@@ -54,21 +59,23 @@ const renderDetails = ({ name, id, date, description, location }) => {
   `;
 }
 
-const guestApi = async () => {
-  const response = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/guests');
-  const responseJson = await response.json();
-  const guestList = responseJson.data;
-  console.log('guest', guestList);
-}
-
-const rsvpApi = async () => {
-  const response = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/rsvps');
-  const responseJson = await response.json();
-  const rsvpList = responseJson.data;
-  console.log('rsvp', rsvpList);
-}
-
 getApi();
 
-guestApi();
-rsvpApi();
+// const guestApi = async () => {
+//   const response = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/guests');
+//   const responseJson = await response.json();
+//   const guestList = responseJson.data;
+//   console.log('guest', guestList);
+// }
+
+// const rsvpApi = async () => {
+//   const response = await fetch('https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/rsvps');
+//   const responseJson = await response.json();
+//   const rsvpList = responseJson.data;
+//   console.log('rsvp', rsvpList);
+// }
+
+
+
+// guestApi();
+// rsvpApi();
