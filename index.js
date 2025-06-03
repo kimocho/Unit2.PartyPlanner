@@ -11,6 +11,7 @@ div.innerHTML = `
     <h2>Upcoming Parties</h2>
     <ul id="partyNames"></ul>
     <h2>Here are a list of guest RSVPs</h2>
+    <h5>No RSVPs</h5>
   </section>
   <aside>
     <h2>Party Details</h2>
@@ -74,8 +75,6 @@ getApi();
 //   const rsvpList = responseJson.data;
 //   console.log('rsvp', rsvpList);
 // }
-
-
 
 // guestApi();
 // rsvpApi();
